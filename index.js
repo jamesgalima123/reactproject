@@ -48,10 +48,10 @@ app.listen(3001,()=>{
 });
 app.post('/hello',(request,response) =>{
     let username = request.body.username;
-    let password = request.body.password;
     let email = request.body.email;
+    let temp_pass = randomstring(5);
     console.log(username);
-    const query = "insert into `users`(`username`,`password`) values('" + encrypt(username).encryptedData + "','"+ encrypt(password).encryptedData +"' );"
+    const query = "insert into `users`(`username`,`password`) values('" + encrypt(username).encryptedData + "','"+ encrypt(temp_pass).encryptedData +"' );"
     con.query(query,(err)=>{
         if(err){
             console.log(err);
@@ -61,7 +61,7 @@ app.post('/hello',(request,response) =>{
                 from:'cjaygalima@gmail.com',
                 to:email,
                 subject:'hi',
-                text:'your temporary password is ' + randomstring(5)
+                text:'your temporary password is ' + temp_pass
             };
             transporter.sendMail(mailOptions,(error,info)=>{
                 if(error){
@@ -89,7 +89,7 @@ con.query("select* from `users`",(err,rows)=>{
 con.query(query);*/
 function randomstring(length) {
     var result           = '';
-    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var characters       = 'abcdefghijklmnopqrstuvwxyz0123456789';
     var charactersLength = characters.length;
     for ( var i = 0; i < length; i++ ) {
       result += characters.charAt(Math.floor(Math.random() * 
