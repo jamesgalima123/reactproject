@@ -7,11 +7,12 @@ const crypto = require('crypto');
 const algorithm = 'aes-256-cbc'; //Using AES encryption
 const key = crypto.randomBytes(32);
 const iv = crypto.randomBytes(16);
+console.log("the iv: " + iv.toString());
 const transporter = nodemailer.createTransport({
     service:'gmail',
     auth:{
         user:'cjaygalima@gmail.com',
-        pass:'cj0126101'
+        pass:''
     },
     tls:{
         rejectUnauthorized:false,
